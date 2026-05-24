@@ -1,0 +1,46 @@
+{% extends "utils/vendor_base.html" %}
+
+{% block start %}
+
+<div class ="container mt-5">
+    <div class="col-6 ">
+        <h2>Vendor Dashboard</h2>
+
+        
+
+        <a href="{% url 'add_hotel'%}"class="btn btn-success">Add New Hotel</a>
+    </div>
+<div class="row">
+    {% for hotel in hotels %}
+        <div class="col-md-3 mt-4 " >
+            <div class="card h-100" style="width: 18rem;">
+            <img src="/media/{{ hotel.hotel_images.first.image }}" height="190" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ hotel.hotel_name }}</h5>
+                <p class="card-text" style="height:50px; overflow:hidden;">{{ hotel.hotel_description }}</p>
+
+                {% for amenitie in hotel.amenities.all %}
+                    <span class="badge bg-primary">{{ amenitie.name }}</span>            
+                {% endfor %}
+                <br>
+                <div class="d-flex gap-1 mt-1">
+                    <a href="{% url 'upload_images' hotel.hotel_slug %}" class="btn btn-success flex-fill">Image</a>
+                    <a href="{% url 'edit_hotel' hotel.hotel_slug %}" class="btn btn-warning flex-fill">Edit</a>
+                </div>           
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+
+</div>
+
+</div>
+</div>
+
+
+
+{% endblock %}

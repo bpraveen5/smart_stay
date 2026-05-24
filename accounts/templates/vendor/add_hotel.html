@@ -1,0 +1,64 @@
+{% extends "utils/vendor_base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="col-6 mx-auto card shadow p-4">
+        <h2>Add Hotel</h2>
+        {% include "utils/alerts.html" %}
+        <form method="POST">
+            {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Hotel Name</label>
+    <input id ="hotel_name" type="text" name="hotel_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="mb-3">
+  <label for="exampleInputEmail1" class="form-label">Hotel Description</label>
+  <textarea class="form-control" name="hotel_description" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 50px"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Hotel Price</label>
+    <input id ="hotel_price" type="number" name="hotel_price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Hotel Amenities</label>
+    <select name = "amenities" class="form-select form-select-sm" multiple  id="amenities">
+      {% for amenitie in amenities %}
+        <option value="{{ amenitie.id }}">{{ amenitie.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Hotel Offer Price</label>
+    <input id ="hotel_offer_price" type="number" name="hotel_offer_price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+ 
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Hotel Location</label>
+    <input id ="hotel_location" type="text" name="hotel_location" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  {% comment %} <button type="button" class="btn btn-success" onclick="sendOtp()">Login with OTP</button> {% endcomment %}
+</form>
+    </div>
+</div>
+
+<script>
+
+function sendOtp() {
+    var email = document.getElementById('email').value;
+    // Add your OTP sending logic here
+    if (email == "") {
+        alert("Email can not be empty.");
+        return;
+    }
+    window.location.href = `/account/send_otp/${email}/`
+}
+
+</script>
+
+{% endblock%}

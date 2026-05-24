@@ -1,0 +1,36 @@
+    
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="col-6 mx-auto card shadow p-4">
+        {% include "utils/alerts.html" %}
+        <form method="POST">
+            {% csrf_token %}
+  
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">OTP</label>
+    <input type="text" name="otp" class="form-control" id="exampleInputPassword1">
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+    </div>
+</div>
+
+<script>
+
+function sendOtp() {
+    var email = document.getElementById('email').value;
+    // Add your OTP sending logic here
+    if (email == "") {
+        alert("Email can not be empty.");
+        return;
+    }
+    window.location.href = `/account/send_otp/${email}/`
+}
+
+</script>
+
+{% endblock%}

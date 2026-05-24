@@ -1,0 +1,55 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container mt-5">
+    <div class="col-6 mx-auto">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" name="search" type="text" placeholder="Search for hotels, locations and more..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="row">
+        {% for hotel in hotels %}
+        <div class="col-md-3 mt-3">
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'hotel_details' hotel.hotel_slug %}">
+                {% if hotel.hotel_images.first %}
+            <img src="/media/{{ hotel.hotel_images.first.image }}" height="190" class="card-img-top" alt="...">
+            {% else %}
+            <img src="data:image/jpeg;base64,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" height="190" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ hotel.hotel_name }}</h5>
+                <p class="card-text">{{ hotel.hotel_description }}</p>
+                <div class="d-flex align-items-center gap-2 mt-2">
+                <span>
+                    Price: ₹<span class="badge bg-secondary text-decoration-line-through">
+                        {{ hotel.hotel_price }}
+                    </span>
+                </span>
+
+                <span>
+                    Offer: ₹<span class="badge bg-success">
+                        {{ hotel.hotel_offer_price }}
+                    </span>
+                </span>
+</div>
+                <p class="card-text d-flex align-items-center gap-2">
+                <span class="badge bg-danger">Location</span>:
+                <span class="fw-semibold">{{ hotel.hotel_location }}</span>
+                </p>
+                 {% for amenitie in hotel.amenities.all %}
+                 <span class="badge bg-primary">{{ amenitie.name }}</span>            
+
+                {% endfor %}
+                <a href="#" class="btn btn-primary mt-2">Book Now</a>           
+                </div>
+            </a>
+            </div>
+        </div>
+        {% endfor%}
+
+    </div>
+</div>
+{% endblock %}

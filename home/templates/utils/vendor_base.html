@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Smart Stay</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+        <img src="https://cdn-icons-png.flaticon.com/512/3179/3179068.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        Smart Stay
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class=" navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}">Dashboard</a>
+        <a class="nav-link" href="{% url 'login_page' %}">Login</a>
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+        <a class="nav-link" href="">Bookings</a>
+        <a class="btn btn-danger position-absolute end-0 me-3" href="{% url 'logout_view' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    {% block start %}
+    {% endblock %}
+
+    <!-- Footer Section -->
+<footer class="bg-dark text-light pt-4 pb-3 mt-5">
+    <div class="container">
+        <div class="row">
+
+            <!-- Brand Info -->
+            <div class="col-md-4 mb-3">
+                <h4 class="fw-bold text-info">Smart Stay</h4>
+                <p>
+                    Find comfortable and affordable stays with Smart Stay.
+                    Book hotels, rooms, and vacation stays easily.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-4 mb-3">
+                <h5 class="fw-semibold">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/" class="text-light text-decoration-none">Home</a></li>
+                    <li><a href="/rooms" class="text-light text-decoration-none">Rooms</a></li>
+                    <li><a href="/about" class="text-light text-decoration-none">About</a></li>
+                    <li><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-4 mb-3">
+                <h5 class="fw-semibold">Contact</h5>
+                <p>Email: support@smartstay.com</p>
+                <p>Phone: +91 9876543210</p>
+                <p>Location: India</p>
+            </div>
+
+        </div>
+
+        <hr class="border-light">
+
+        <!-- Bottom Footer -->
+        <div class="text-center">
+            <p class="mb-0">
+                © 2026 Smart Stay. All Rights Reserved. |
+                <a href="{% url 'login_vendor' %}" >Login Vendor</a> |
+                <a href="{% url 'register_vendor' %}" >Register Vendor</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

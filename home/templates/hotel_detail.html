@@ -1,0 +1,161 @@
+{% extends "utils/base.html" %}
+
+{% block start %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h2 class="fw-bold">Hotel Details</h2>
+
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
+                <div class="row g-0">
+
+<div class="col-lg-6">
+
+    {% if hotel.hotel_images.all %}
+
+    <!-- Main Image -->
+    <div class="mb-3">
+        <img src="/media/{{ hotel.hotel_images.first.image }}"
+             class="img-fluid w-100 rounded-top object-fit-cover"
+             style="height: 400px;"
+             alt="Hotel Image">
+    </div>
+
+    <!-- Multiple Images -->
+    <div class="row g-2 px-2 pb-2">
+
+        {% for image in hotel.hotel_images.all %}
+
+        <div class="col-4">
+            <img src="/media/{{ image.image }}"
+                 class="img-fluid rounded object-fit-cover w-100 border"
+                 style="height: 110px;"
+                 alt="Hotel Image">
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <img src="/static/images/default_hotel.jpg"
+         class="img-fluid w-100 h-100 object-fit-cover"
+         style="min-height: 450px;"
+         alt="Default Hotel">
+
+    {% endif %}
+
+</div>
+
+                    <!-- Hotel Details -->
+                    <div class="col-lg-6">
+                        <div class="card-body p-4 p-lg-5 d-flex flex-column h-100">
+
+                            <!-- Hotel Name -->
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h2 class="fw-bold mb-1">
+                                        {{ hotel.hotel_name }}
+                                    </h2>
+
+                                    <p class="text-muted mb-0 d-flex align-items-center gap-2">
+                                        <i class="bi bi-geo-alt-fill text-danger"></i>
+                                        {{ hotel.hotel_location }}
+                                    </p>
+                                </div>
+
+                                <span class="badge bg-success fs-6 px-3 py-2 rounded-pill">
+                                    Available
+                                </span>
+                            </div>
+
+                            <!-- Description -->
+                            <p class="text-secondary mt-3" style="line-height: 1.8;">
+                                {{ hotel.hotel_description }}
+                            </p>
+
+                            <!-- Amenities -->
+                            <div class="mt-3">
+                                <h6 class="fw-bold mb-3">Amenities</h6>
+
+                                <div class="d-flex flex-wrap gap-2">
+                                    {% for amenitie in hotel.amenities.all %}
+                                    <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">
+                                        {{ amenitie.name }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Price Section -->
+                            <div class="mt-4 p-4 bg-light rounded-4 border">
+
+                                <div class="d-flex align-items-center gap-3 flex-wrap">
+
+                                    <div>
+                                        <small class="text-muted d-block">
+                                            Original Price
+                                        </small>
+
+                                        <span class="text-decoration-line-through text-secondary fs-5">
+                                            ₹{{ hotel.hotel_price }}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <small class="text-muted d-block">
+                                            Offer Price
+                                        </small>
+
+                                        <span class="fw-bold text-success fs-3">
+                                            ₹{{ hotel.hotel_offer_price }}
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                {%if request.user.is_authenticated%}
+                                <form method = "POST">
+                                    {% csrf_token %}
+                                    {% include "utils/alerts.html" %}
+
+                                    <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Start Date</label>
+                                    <input type="date" name="start_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">End Date</label>
+                                    <input type="date" name="end_date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+
+                                        <div class="mt-4 d-grid">
+                                        <button type="submit" class="btn btn-danger btn-lg rounded-3 fw-semibold py-3">
+                                            Reserve Now
+                                        </button>
+                                    </div>
+                                </form>
+                                {% else %}
+                                    <p class="text-muted">
+                                        Please <a href="{% url 'login_page' %}">login</a> to book this hotel.
+                                    </p>
+                                {% endif %}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
